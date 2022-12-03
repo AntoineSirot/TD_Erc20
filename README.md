@@ -1,78 +1,46 @@
 # ERC20 101
 
 ## Introduction
-Welcome! This is an automated workshop that will explain how to deploy and ERC20 token, and customize it to perform specific functions.
-It is aimed at developpers that have never written code in Solidity, but who understand its syntax.
 
-## How to work on this TD
-### Introduction
-The TD has two components:
-- An ERC20 token, ticker TD-ERC20-101, that is used to keep track of points 
-- An evaluator contract, that is able to mint and distribute TD-ERC20-101 points
+Welcome! This is my work on an automatic workshop. This repository contain my answer but you can also work on this project by going to the repo I forked on. In this project I implemented several functions in a new ERC20 smart contract to interact with the Evaluator contract (which goerli address is : 0x7C5629d850eCD1E640b1572bC0d4ac5210b38FA5). I will explain the logic i used in every step of this projet. 
 
-Your objective is to gather as many TD-ERC20-101 points as possible. Please note :
-- The 'transfer' function of TD-ERC20-101 has been disabled to encourage you to finish the TD with only one address
-- You can answer the various questions of this workshop with different ERC20 contracts. However, an evaluated address has only one evaluated ERC20 contract at a time. To change the evaluated ERC20 contract associated with your address, call `submitExercice()`  with that specific address.
-- In order to receive points, you will have to do execute code in `Evaluator.sol` such that the function `TDERC20.distributeTokens(msg.sender, n);` is triggered, and distributes n points.
-- This repo contains an interface `IExerciceSolution.sol`. Your ERC20 contract will have to conform to this interface in order to validate the exercice; that is, your contract needs to implement all the functions described in `IExerciceSolution.sol`. 
-- A high level description of what is expected for each exercice is in this readme. A low level description of what is expected can be inferred by reading the code in `Evaluator.sol`.
-- The Evaluator contract sometimes needs to make payments to buy your tokens. Make sure he has enough ETH to do so! If not, you can send ETH directly to the contract.
+## How could you run my solution ? 
 
-### Getting to work
-- Clone the repo on your machine
-- Install the required packages `npm install truffle`, `npm install @openzeppelin/contracts@3.4.1` , `npm install @truffle/hdwallet-provider`
-- Renam `example-truffle-config.js` to `truffle-config.js` . That is now your truffle config file.
-- Configure a seed for deployment of contracts in your truffle config file
-- Register for an infura key and set it up in your truffle config file
-- Download and launch Ganache
-- Test that you are able to connect to the goerli network with `truffle console`
-- Test that you are able to connect to the goerli network with `truffle console --network goerli`
-- To deploy a contract, configure a migration in the [migration folder](migrations). Look at the way the TD is deploy and try to iterate
-- Test your deployment in Ganache `truffle migrate`
-- Deploy on goerli `truffle migrate --network goerli --skip-dry-run`
+To do so you just have to clone my repo and implement you private key and your infura key in the truffle-config.js file. WARNING don't forget that you should never share your private key especially in a GitHub repository !!
 
+## How did I work on this TD
+### Warning
 
-## Points list
-### Setting up
-- Create a git repository and share it with the teacher
-- Install truffle and create an empty truffle project (2 pts). Create an infura API key to be able to deploy to the goerli testnet
-These points will be attributed manually if you do not manage to have your contract interact with the evaluator, or automatically in the first question.
+Before I start to explain how I proceed to work I should warn you that my solution isn't optimized at all. I did the maximum I could in the time I had so for example you can't complete every exercices with my current contract. I changed it several times to validate exercices.
 
-### ERC20 basics
-- Call  `ex1_getTickerAndSupply()` in the evaluator contract to receive a random ticker for your ERC20 token, as well as an initial token supply (1 pt). You can read your assigned ticker and supply in `Evaluator.sol` by calling getters `readTicker()` and `readSupply()`
-- Create an ERC20 token contract with the proper ticker and supply (2 pt)
-- Deploy it to the goerli testnet (1 pts)
-- Call `submitExercice()` in the Evaluator to configure the contract you want evaluated (Previous 5 points are attributed at that step)
-- Call `ex2_testErc20TickerAndSupply()` in the evaluator to receive your points (2 pts) 
+### Exercice 1 & 2 :
 
-### Distributing and selling tokens
-- Create a `getToken()` function in your contract, deploy it, and call the `ex3_testGetToken()` function that distributes token to the caller (2 pts).
-- Create a `buyToken()` function in your contract, deploy it, and call the `ex4_testBuyToken()` function that lets the caller send an arbitrary amount of ETH, and distributes a proportionate amount of token (2 pts).
+In these Exercices I had to call exercice1 evaluator's function to get a random supply and ticker. Then I've implemented them in my contract and I've also implemented the symbol() function to validate Exercice2.
 
-### Creating an ICO allow list
-- Create a customer allow listing function. Only allow listed users should be able to call `getToken()`
-- Call `ex5_testDenyListing()` in the evaluator to show he can't buy tokens using `buyTokens()` (1 pt)
-- Allow the evaluator to buy tokens
-- Call `ex6_testAllowListing()`in the evaluator to show he can now buy tokens `buyTokens()` (2 pt)
+### Exercice 3 :
 
-### Creating multi tier allow list
-- Create a customer multi tier listing function. Only allow listed users should be able to call `buyToken()`; and customers should receive a different amount of token based on their level
-- Call `ex7_testDenyListing()` in the evaluator to show he can't buy tokens using `buyTokens()` (1 pt)
-- Add the evaluator in the first tier. He should now be able to buy N tokens for Y amount of ETH
-- Call `ex8_testTier1Listing()` in the evaluator to show he can now buy tokens(2 pt)
-- Add the evaluator in the second tier. He should now be able to buy 2N tokens for Y amount of ETH 
-- Call `ex9_testTier2Listing()` in the evaluator to show he can now buy more tokens(2 pt)
+In this Exercice I've implemented GetToken() function to give free token to the Evaluator.
 
-### All in one
-- Finish all the workshop in a single transaction! Write a contract that implements a function called `completeWorkshop()` when called. Call `ex10_allInOne()` from this contract. All points are credited to the validating contract (2pt)
+### Exercice 4 :
 
-### Extra points
-Extra points if you find bugs / corrections this TD can benefit from, and submit a PR to make it better.  Ideas:
-- Adding a way to check the code of a specific contract was only used once (no copying) 
+Here I've implemented BuyToken() so the Evaluator could buy token proportionnaly to the amount he enters in his demand.
 
-## TD addresses
-- Points contracts `0x09f14a40Fd672B5B056FF8b5c343498452CAC4b2`
-- Evaluator `0x7C5629d850eCD1E640b1572bC0d4ac5210b38FA5`
+### Exercice 5 & 6:
 
+After implementing BuyToken I add a list of addresses to WhiteList addresses (i also could have used a mapping). With this WhiteList you wil or won't be able to buy my contract's token.
 
+### Exercice 7 :
 
+This Exercice was quick, I only had to add different customer Tier level like a VIP system and initialize it to 0 if an address wasn't WhiteListed.
+
+### Exercice 8 & 9 :
+
+In these last Exercices I implemented my BuyToken() function so that if your customer level is high my token will be cheaper for you.
+
+### Exercice 10 :
+
+As I said in the warning I didn't implement this exercice but I will one day to have a clearer code.
+
+## Conclusion
+
+This TD was an excellent introduction to start coding in Solidity after I had read severals smart contracts.
