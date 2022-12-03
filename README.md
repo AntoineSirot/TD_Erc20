@@ -23,11 +23,11 @@ In this Exercice I've implemented GetToken() function to give free token to the 
 
 ### Exercice 4 :
 
-Here I've implemented BuyToken() so the Evaluator could buy token proportionnaly to the amount he enters in his demand.
+Here I've implemented BuyToken() so the Evaluator could buy token proportionally to the amount he enters in his demand.
 
 ### Exercice 5 & 6:
 
-After implementing BuyToken I add a list of addresses to WhiteList addresses (i also could have used a mapping). With this WhiteList you wil or won't be able to buy my contract's token.
+After implementing BuyToken I add a list of addresses to WhiteList addresses (i also could have used a mapping). With this WhiteList you will or won't be able to buy my contract's token.
 
 ### Exercice 7 :
 
@@ -39,7 +39,7 @@ In these last Exercices I implemented my BuyToken() function so that if your cus
 
 ### Exercice 10 :
 
-As I said in the warning I didn't implement this exercice but I will one day to have a clearer code.
+As I said in the warning I didn't implement this exercice but I will one day to have a cleaner code.
 
 ## Conclusion
 
