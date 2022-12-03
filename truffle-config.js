@@ -1,6 +1,6 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-var mnemonic = "Enter your mnemonic here"
-var infuraApiKey = "enter your api key here"
+var privatekey = "YOUR_PRIVATE_KEY"
+var infuraApiKey = "YOUR_INFURA_KEY"
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -39,12 +39,11 @@ module.exports = {
    */
 
   networks: {
-
-    rinkeby: {
-      provider: function() {
-        return new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/v3/" + infuraApiKey)
+    goerli: {
+      provider: function(){
+        return new HDWalletProvider(privatekey, "https://goerli.infura.io/v3/"  + infuraApiKey)
       },
-      network_id: 4,
+      network_id: 5,
       networkCheckTimeout: 30000
     }
     // Useful for testing. The `development` name is special - truffle uses it by default
